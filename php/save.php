@@ -10,7 +10,7 @@
 
     $encodeCards = json_encode($_SESSION['cards']);
 
-    $conn = oci_connect('u1987712', '2442Hima', 'ORCLCDB');
+    $conn = oci_connect('u4000775', '*********', 'ORCLCDB');
     $insert="INSERT INTO memory_save
     (uuid, pairs, points, cards )
     VALUES
