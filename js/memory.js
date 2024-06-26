@@ -1,4 +1,5 @@
 export var game = function(){
+    var options = JSON.parse(localStorage.options);
     const back = '../resources/back.png';
     const resources = ['../resources/cb.png', '../resources/co.png', '../resources/sb.png','../resources/so.png', '../resources/tb.png','../resources/to.png'];
     const card = {
@@ -19,8 +20,21 @@ export var game = function(){
     };
 
     var lastCard;
-    var pairs = 2;
+    var pairs = options.pairs;
     var points = 100;
+
+    var pointsPerMistake = 25; // Nombre de punts a restar per error, segons la dificultat
+    switch (options.difficulty) {
+        case 'easy':
+            pointsPerMistake = 15;
+            break;
+        case 'hard':
+            pointsPerMistake = 35;
+            break;
+        default:
+            pointsPerMistake = 25;
+            break;
+    }
 
     return {
         init: function (call){
@@ -44,7 +58,7 @@ export var game = function(){
                 }
                 else{
                     [card, lastCard].forEach(c=>c.goBack());
-                    points-=25;
+                    points-=pointsPerMistake;
                     if (points <= 0){
                         alert ("Has perdut");
                         window.location.replace("../");
