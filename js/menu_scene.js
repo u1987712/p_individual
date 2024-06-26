@@ -25,7 +25,7 @@ class menu_scene extends Phaser.Scene {
             .setInteractive()
             .on('pointerdown', () => this.scene.start('ranking_scene'));
 
-        [mode1Button, mode2Button, optionsButton, rankingsButton].forEach(button => {
+        [mode1Button, mode2Button, optionsButton, rankingButton].forEach(button => {
             button.setOrigin(0.5);
         });
     }
