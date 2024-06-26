@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     $('#play').click(function() {
         console.log('Play button clicked');
+        sessionStorage.removeItem("save");
         window.location.assign("./html/game.html");
     });
 
@@ -12,8 +13,24 @@ $(document).ready(function() {
     });
 
     $('#saves').click(function() {
-        console.log('Saves button clicked');
-        console.error("Opció no implementada");
+        fetch("./php/load.php", {
+            method: "POST",
+            body: "",
+            headers: { "content-type": "application/json; charset=UTF-8" }
+        })
+        .then(response => {
+            if (response.ok) return response.text();
+            else throw new Error("PHP connection fail");
+        })
+        .then(partida => {
+            sessionStorage.save = partida;
+        })
+        .catch(err => {
+            sessionStorage.save = localStorage.save; // fallback to localStorage if fetch fails
+        })
+        .finally(() => {
+            window.location.assign("./html/game.html");
+        });
     });
 
     $('#exit').click(function() {
