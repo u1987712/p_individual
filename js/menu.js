@@ -32,9 +32,4 @@ $(document).ready(function() {
             window.location.assign("./html/game.html");
         });
     });
-
-    $('#exit').click(function() {
-        console.log('Exit button clicked');
-        console.warn("No es pot sortir!");
-    });
 });
