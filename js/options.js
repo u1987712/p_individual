@@ -1,63 +1,47 @@
 $(document).ready(function() {
-    var options = function() {
-        const default_options = {
-            pairs: 2,
-            difficulty: 'normal'
-        };
+    const default_options = {
+        pairs: 2,
+        difficulty: 'normal',
+        difficulty_mode2: 'normal'
+    };
 
-        var pairs = $('#pairs');
-        var difficulty = $('#dif');
+    let options = JSON.parse(localStorage.getItem('options') || JSON.stringify(default_options));
 
-        var options = JSON.parse(localStorage.options || JSON.stringify(default_options));
-        
-        if (options.pairs < 2 || options.pairs > 6) {
-            options.pairs = default_options.pairs;
+    const pairs = $('#pairs');
+    const difficulty = $('#dif');
+    const difficulty_mode2 = $('#dif_mode2');
+
+    pairs.val(options.pairs);
+    difficulty.val(options.difficulty);
+    difficulty_mode2.val(options.difficulty_mode2);
+
+    pairs.on('change', function() {
+        const selectedPairs = parseInt(pairs.val());
+        if (selectedPairs >= 2 && selectedPairs <= 6) {
+            options.pairs = selectedPairs;
+        } else {
+            alert("El número de cartes ha de ser entre 2 i 6!");
+            pairs.val(options.pairs);
         }
+    });
 
+    difficulty.on('change', function() {
+        options.difficulty = difficulty.val();
+    });
+
+    difficulty_mode2.on('change', function() {
+        options.difficulty_mode2 = difficulty_mode2.val();
+    });
+
+    $('#apply').on('click', function() {
+        localStorage.setItem('options', JSON.stringify(options));
+    });
+
+    $('#default').on('click', function() {
+        options = { ...default_options };
         pairs.val(options.pairs);
         difficulty.val(options.difficulty);
-
-        pairs.on('change', function() {
-            var selectedPairs = parseInt(pairs.val());
-            if (selectedPairs >= 2 && selectedPairs <= 6) {
-                options.pairs = selectedPairs;
-            } else {
-                alert("El número de cartes ha de ser entre 2 i 6!");
-                pairs.val(options.pairs);
-            }
-        });
-
-        difficulty.on('change', function() {
-            options.difficulty = difficulty.val();
-        });
-
-        return {
-            applyChanges: function() {
-                localStorage.options = JSON.stringify(options);
-            },
-            defaultValues: function() {
-                options.pairs = default_options.pairs;
-                options.difficulty = default_options.difficulty;
-                pairs.val(options.pairs);
-                difficulty.val(options.difficulty);
-            },
-            getOptions: function() {
-                return options;
-            }
-        };
-    }();
-
-    $('#default').click(function() {
-        options.defaultValues();
+        difficulty_mode2.val(options.difficulty_mode2);
+        localStorage.setItem('options', JSON.stringify(options));
     });
-
-    $('#apply').click(function() {
-        options.applyChanges();
-        alert("Canvis aplicats!");
-        window.location.assign("../");
-    });
-
-    var currentOptions = options.getOptions();
-    pairs.val(currentOptions.pairs);
-    difficulty.val(currentOptions.difficulty);
 });

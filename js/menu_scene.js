@@ -19,7 +19,7 @@ class menu_scene extends Phaser.Scene {
 
         const optionsButton = this.add.text(400, 300, 'Opcions', { fontSize: '24px', fill: '#0f0' })
             .setInteractive()
-            .on('pointerdown', () => window.location.href = 'options.html');
+            .on('pointerdown', () => this.scene.start('options_scene'));
 
         const rankingButton = this.add.text(400, 350, 'Ranking', { fontSize: '24px', fill: '#0f0' })
             .setInteractive()
