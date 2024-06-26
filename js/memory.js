@@ -25,10 +25,10 @@ export var game = function(){
     return {
         init: function (call){
             var items = resources.slice(); // Copiem l'array
-            items.sort(function() {return Math.random() - 0.5}); // Aleatòria
+            items.sort(() => Math.random() - 0.5); // Aleatòria
             items = items.slice(0, pairs); // Agafem els primers
             items = items.concat(items);
-            items.sort(function() {return Math.random() - 0.5}); // Aleatòria
+            items.sort(() => Math.random() - 0.5); // Aleatòria
             return items.map(item => Object.create(card, {front: {value:item}, callback: {value:call}}));
         },
         click: function (card){
