@@ -24,10 +24,6 @@ class menu_scene extends Phaser.Scene {
         const rankingButton = this.add.text(400, 350, 'Ranking', { fontSize: '24px', fill: '#0f0' })
             .setInteractive()
             .on('pointerdown', () => this.scene.start('ranking_scene'));
-        
-        const loadButton = this.add.text(400, 350, 'Carregar', { fontSize: '24px', fill: '#0f0' })
-            .setInteractive()
-            .on('pointerdown', () => this.scene.start('load_scene'));
 
         [mode1Button, mode2Button, optionsButton, rankingsButton].forEach(button => {
             button.setOrigin(0.5);
