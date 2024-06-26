@@ -7,6 +7,11 @@ $(document).ready(function() {
         window.location.assign("./html/game.html");
     });
 
+    $('#ranking').click(function() {
+        console.log('Ranking button clicked');
+        console.warn("Opció no implementada");
+    });
+
     $('#options').click(function() {
         console.log('Options button clicked');
         window.location.assign("./html/options.html");
@@ -33,8 +38,5 @@ $(document).ready(function() {
         });
     });
 
-    $('#exit').click(function() {
-        console.log('Exit button clicked');
-        console.warn("No es pot sortir!");
-    });
+    
 });
