@@ -2,7 +2,7 @@ $(document).ready(function() {
     var options = function() {
         const default_options = {
             pairs: 2,
-            difficulty: 'normal' // default difficulty is normal
+            difficulty: 'normal'
         };
 
         var pairs = $('#pairs');
@@ -10,7 +10,6 @@ $(document).ready(function() {
 
         var options = JSON.parse(localStorage.options || JSON.stringify(default_options));
         
-        // Ensure pairs are within the allowed range (2 to 6)
         if (options.pairs < 2 || options.pairs > 6) {
             options.pairs = default_options.pairs;
         }
@@ -58,7 +57,6 @@ $(document).ready(function() {
         window.location.assign("../");
     });
 
-    // Initialize options display
     var currentOptions = options.getOptions();
     pairs.val(currentOptions.pairs);
     difficulty.val(currentOptions.difficulty);

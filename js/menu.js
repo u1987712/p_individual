@@ -4,7 +4,21 @@ $(document).ready(function() {
     $('#play').click(function() {
         console.log('Play button clicked');
         sessionStorage.removeItem("save");
-        window.location.assign("./html/game.html");
+
+        const gameMode = $('#gameMode').val();
+        sessionStorage.setItem('gameMode', gameMode);
+
+        window.location.assign("./html/game_mode2.html");
+    });
+
+    $('#play').click(function() {
+        console.log('Play button clicked');
+        sessionStorage.removeItem("save");
+
+        const gameMode = $('#gameMode').val();
+        sessionStorage.setItem('gameMode', gameMode);
+
+        window.location.assign("./html/game_mode2.html");
     });
 
     $('#ranking').click(function() {
@@ -31,12 +45,10 @@ $(document).ready(function() {
             sessionStorage.save = partida;
         })
         .catch(err => {
-            sessionStorage.save = localStorage.save; // fallback to localStorage if fetch fails
+            sessionStorage.save = localStorage.save;
         })
         .finally(() => {
             window.location.assign("./html/game.html");
         });
     });
-
-    
 });
